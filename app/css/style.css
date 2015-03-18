@@ -35,3 +35,10 @@ section .active {
 section ul div {
     clear: both;
 }
+section button, section input[type="button"] {
+    height: 40px;
+    border-radius: 3px;
+    border: 1px solid silver;
+    cursor: pointer;
+    background-color: lightgoldenrodyellow;
+}

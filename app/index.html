@@ -13,16 +13,13 @@
 
     <!-- Create a button to call the server -->
     <button ng-click="onClick()">Send AJAX Request</button>
-    <br/>
 
     <!-- Print the full response stored in the scope of the controller -->
-    Data from server: {{jsonData}}
-    <br/>
+    <p>Data from server: {{jsonData}}</p>
 
     <!-- Show the data received only when you actually get them -->
     <div ng-show="jsonData != null">
-        Pretty values are:
-        <br/>
+        <p>Pretty values are:</p>
         <ul>
 
             <!-- For each item in the JSON response print key and value -->
