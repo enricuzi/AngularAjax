@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>-->
+    <script src="js/angular.min.js"></script>
+    <link href="css/style.css" rel="stylesheet"/>
+</head>
+
+<body ng-app="App">
+
+<!-- Attach the controller to this section -->
+<section ng-controller="AjaxCtrl">
+
+    <!-- Create a button to call the server -->
+    <button ng-click="onClick()">Send AJAX Request</button>
+    <br/>
+
+    <!-- Print the full response stored in the scope of the controller -->
+    Data from server: {{jsonData}}
+    <br/>
+
+    <!-- Show the data received only when you actually get them -->
+    <div ng-show="jsonData != null">
+        Pretty values are:
+        <br/>
+        <ul>
+
+            <!-- For each item in the JSON response print key and value -->
+            <li ng-repeat="(key, value) in jsonData">{{key}}: {{value}}</li>
+        </ul>
+    </div>
+</section>
+
+<script>
+
+    /* Define the module 'App' with no other dependency */
+    angular.module("App", [])
+
+            /* Define the controller where handle calls and data */
+            .controller("AjaxCtrl", function ($scope, $http) {
+
+                /* Define the function to call when click on button */
+                $scope.onClick = function () {
+
+                    /* Make the call with method GET */
+                    var response = $http.get("resources/data.json");
+
+                    /* Save data if the call is successful */
+                    response.success(function (data, status, headers, config) {
+
+                        /* Put the data into the scope of the controller */
+                        $scope.jsonData = data;
+                    });
+
+                    /* Handle any error performing the call */
+                    response.error(function (data, status, headers, config) {
+                        console.log("AJAX call failed!");
+                        console.log(data);
+                        console.log(status);
+                        console.log(headers);
+                        console.log(config);
+                    });
+                }
+            });
+</script>
+
+</body>
+
+</html>
